@@ -1,0 +1,111 @@
+name: Drunkin
+options:
+  bundleIdPrefix: fun.dunkin
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  developmentLanguage: en
+settings:
+  base:
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    DEAD_CODE_STRIPPING: YES
+    GCC_TREAT_WARNINGS_AS_ERRORS: NO
+targets:
+  Drunkin:
+    type: application
+    platform: iOS
+    sources:
+      - path: Drunkin
+        excludes:
+          - "**/*.xcprivacy"
+      - path: Drunkin/Resources/PrivacyInfo.xcprivacy
+        buildPhase: resources
+    info:
+      path: Drunkin/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: en
+        CFBundleDisplayName: Drunkin
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: $(PRODUCT_BUNDLE_PACKAGE_TYPE)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        LSSupportsOpeningDocumentsInPlace: false
+        ITSAppUsesNonExemptEncryption: false
+        UIUserInterfaceStyle: Dark
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSLocalNetworkUsageDescription: Drunkin connects directly to the phones at your tasting table so everyone's scores can sync without internet.
+        NSBonjourServices:
+          - _drunkin-tst._tcp
+          - _drunkin-tst._udp
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: Drunkin Tasting
+            CFBundleTypeRole: Editor
+            LSHandlerRank: Owner
+            LSItemContentTypes:
+              - fun.dunkin.drunkin.tasting
+        UTExportedTypeDeclarations:
+          - UTTypeIdentifier: fun.dunkin.drunkin.tasting
+            UTTypeDescription: Drunkin Tasting
+            UTTypeConformsTo:
+              - public.data
+              - public.content
+            UTTypeTagSpecification:
+              public.filename-extension:
+                - drunkin
+              public.mime-type:
+                - application/x-drunkin-tasting
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: fun.dunkin.drunkin
+        PRODUCT_NAME: Drunkin
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_STYLE: Automatic
+        INFOPLIST_FILE: Drunkin/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+      configs:
+        Release:
+          SWIFT_COMPILATION_MODE: wholemodule
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+  DrunkinTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: DrunkinTests
+    dependencies:
+      - target: Drunkin
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: fun.dunkin.drunkin.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  Drunkin:
+    build:
+      targets:
+        Drunkin: all
+        DrunkinTests: [test]
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - DrunkinTests
+    archive:
+      config: Release
