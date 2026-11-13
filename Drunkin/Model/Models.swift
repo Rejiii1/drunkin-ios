@@ -150,7 +150,7 @@ extension Tasting {
     var isHost: Bool { role == .host }
     var isReadOnly: Bool { role == .archive || me == nil }
 
-    var currentFlight: Flight? { currentFlightID.flatMap(flight) }
+    var currentFlight: Flight? { currentFlightID.flatMap { flight($0) } }
 
     var pendingCount: Int { role == .guest ? dirty.count : 0 }
 }
