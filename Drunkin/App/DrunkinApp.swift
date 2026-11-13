@@ -13,7 +13,7 @@ struct DrunkinApp: App {
                 .tint(Theme.gold)
         }
         .onChange(of: phase) { _, newPhase in
-            model.setActive(newPhase == .active)
+            model.setActive(newPhase != .background)
         }
     }
 }

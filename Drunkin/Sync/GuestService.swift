@@ -1,5 +1,5 @@
 import Foundation
-import MultipeerConnectivity
+@preconcurrency import MultipeerConnectivity
 
 struct NearbyHost: Identifiable, Equatable {
     var peer: MCPeerID

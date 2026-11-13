@@ -1,5 +1,5 @@
 import Foundation
-import MultipeerConnectivity
+@preconcurrency import MultipeerConnectivity
 
 /// Runs on the host's phone while a hosted tasting is open. Advertises the
 /// tasting to nearby phones over Multipeer Connectivity (Bluetooth / Wi-Fi,
